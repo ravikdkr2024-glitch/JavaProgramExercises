@@ -1,0 +1,144 @@
+import java.util.*;
+
+public class MasterArrayProgram {
+
+    public static void main(String[] args) {
+
+        int[] arr = {4, 2, 7, 2, 9, 4, 5};
+        int n = arr.length;
+
+        // 1 Traversal
+        System.out.println("Traversal:");
+        for(int i=0;i<n;i++){
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+
+        // 2 Sum of array
+        int sum=0;
+        for(int num : arr){
+            sum += num;
+        }
+        System.out.println("Sum = " + sum);
+
+        // 3 Maximum element
+        int max = arr[0];
+        for(int num : arr){
+            if(num > max){
+                max = num;
+            }
+        }
+        System.out.println("Max = " + max);
+
+        // 4 Minimum element
+        int min = arr[0];
+        for(int num : arr){
+            if(num < min){
+                min = num;
+            }
+        }
+        System.out.println("Min = " + min);
+
+        // 5 Reverse array
+        System.out.println("Reverse:");
+        for(int i=n-1;i>=0;i--){
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+
+        // 6 Frequency count
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+        for(int num : arr){
+            map.put(num, map.getOrDefault(num,0)+1);
+        }
+
+        System.out.println("Frequency:");
+        System.out.println(map);
+
+        // 7 Duplicate detection
+        System.out.println("Duplicates:");
+        for(int key : map.keySet()){
+            if(map.get(key) > 1){
+                System.out.println(key);
+            }
+        }
+
+        // 8 Two sum
+        int target = 11;
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int num : arr){
+
+            int complement = target - num;
+
+            if(set.contains(complement)){
+                System.out.println("Two Sum Pair: " + num + " " + complement);
+                break;
+            }
+
+            set.add(num);
+        }
+
+        // 9 Prefix Sum
+        int[] prefix = new int[n];
+
+        prefix[0] = arr[0];
+
+        for(int i=1;i<n;i++){
+            prefix[i] = prefix[i-1] + arr[i];
+        }
+
+        System.out.println("Prefix Array:");
+        System.out.println(Arrays.toString(prefix));
+
+        // 10 Sliding Window (size 3)
+        int k = 3;
+        int windowSum = 0;
+
+        for(int i=0;i<k;i++){
+            windowSum += arr[i];
+        }
+
+        int maxSum = windowSum;
+
+        for(int i=k;i<n;i++){
+
+            windowSum = windowSum - arr[i-k] + arr[i];
+
+            maxSum = Math.max(maxSum, windowSum);
+        }
+
+        System.out.println("Max window sum = " + maxSum);
+
+        // 11 Second Largest Element
+        int largest = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+
+        for(int num : arr){
+
+            if(num > largest){
+                second = largest;
+                largest = num;
+            }
+
+            else if(num > second && num != largest){
+                second = num;
+            }
+        }
+
+        System.out.println("Second largest = " + second);
+
+        // 12 Check sorted array
+        boolean sorted = true;
+
+        for(int i=1;i<n;i++){
+            if(arr[i] < arr[i-1]){
+                sorted = false;
+                break;
+            }
+        }
+
+        System.out.println("Sorted: " + sorted);
+    }
+}
