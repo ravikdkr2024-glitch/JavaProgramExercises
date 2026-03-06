@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class MaxUrlOccurrence {
+
+    public static void main(String[] args) {
+
+        String filePath = "urls.txt";
+
+        Map<String, Integer> map = new HashMap<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                line = line.trim();
+
+                if (!line.isEmpty()) {
+                    map.put(line, map.getOrDefault(line, 0) + 1);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String maxUrl = "";
+        int maxCount = 0;
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                maxUrl = entry.getKey();
+            }
+        }
+
+        System.out.println("URL with maximum occurrence:");
+        System.out.println(maxUrl + " -> " + maxCount);
+    }
+}
