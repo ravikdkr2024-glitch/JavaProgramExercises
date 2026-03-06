@@ -1,0 +1,89 @@
+import java.util.*;
+
+public class LongestSubstring {
+
+    public static int lengthOfLongestSubstring(String s) {
+
+        Set<Character> set = new HashSet<>();
+
+        int left = 0;
+        int maxLength = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+
+            while (set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+
+            set.add(s.charAt(right));
+
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+
+    public static void main(String[] args) {
+
+        String s = "abcabcbb";
+
+        int result = lengthOfLongestSubstring(s);
+
+        System.out.println("Longest substring length: " + result);
+    }
+}
+
+
+Java Brute Force Code
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class LongestSubstringBrute {
+
+    public static int lengthOfLongestSubstring(String s) {
+
+        int maxLength = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            for (int j = i; j < s.length(); j++) {
+
+                if (allUnique(s, i, j)) {
+                    maxLength = Math.max(maxLength, j - i + 1);
+                }
+
+            }
+        }
+
+        return maxLength;
+    }
+
+    public static boolean allUnique(String s, int start, int end) {
+
+        Set<Character> set = new HashSet<>();
+
+        for (int k = start; k <= end; k++) {
+
+            char c = s.charAt(k);
+
+            if (set.contains(c)) {
+                return false;
+            }
+
+            set.add(c);
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+
+        String s = "abcabcbb";
+
+        int result = lengthOfLongestSubstring(s);
+
+        System.out.println("Longest substring length: " + result);
+    }
+}
