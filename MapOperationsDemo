@@ -1,0 +1,65 @@
+import java.util.*;
+
+public class MapOperationsDemo {
+
+    public static void main(String[] args) {
+
+        // 1️⃣ Create Map
+        Map<String, Integer> map = new HashMap<>();
+
+        // 2️⃣ put() → Insert elements
+        map.put("Google", 3);
+        map.put("Facebook", 2);
+        map.put("YouTube", 5);
+        map.put("Amazon", 1);
+
+        System.out.println("Initial Map:");
+        System.out.println(map);
+
+        // 3️⃣ get() → Fetch value
+        System.out.println("\nValue of Google: " + map.get("Google"));
+
+        // 4️⃣ containsKey() and containsValue()
+        System.out.println("\nContains key Amazon? " + map.containsKey("Amazon"));
+        System.out.println("Contains value 5? " + map.containsValue(5));
+
+        // 5️⃣ Update value
+        map.put("Amazon", 10);
+        System.out.println("\nUpdated Amazon value: " + map.get("Amazon"));
+
+        // 6️⃣ remove()
+        map.remove("Facebook");
+        System.out.println("\nAfter removing Facebook:");
+        System.out.println(map);
+
+        // 7️⃣ Iteration using entrySet()
+        System.out.println("\nIterating using entrySet:");
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+
+        // 8️⃣ Iteration using keySet()
+        System.out.println("\nIterating using keySet:");
+        for (String key : map.keySet()) {
+            System.out.println(key + " -> " + map.get(key));
+        }
+
+        // 9️⃣ Sorting by Key
+        System.out.println("\nSorting by Key:");
+        Map<String, Integer> treeMap = new TreeMap<>(map);
+        for (Map.Entry<String, Integer> entry : treeMap.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+
+        // 🔟 Sorting by Value
+        System.out.println("\nSorting by Value:");
+
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
+
+        list.sort((a, b) -> a.getValue() - b.getValue());
+
+        for (Map.Entry<String, Integer> entry : list) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+}
